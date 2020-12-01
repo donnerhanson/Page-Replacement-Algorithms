@@ -5,12 +5,22 @@
 //  Created by Donner Hanson on 11/30/20.
 //  Copyright © 2020 Donner Hanson. All rights reserved.
 //
+// TODO: Need to add Documentation - readme, header
+// TODO: Need to add LRU
+// TODO: Need to add OPTIMAL
 
 #include <algorithm>
 #include <iostream>
 #include <string>
 
 // 7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1 - to test against notes - passing
+/*
+ ---Should be for FIFO---
+ Input Page String Length: 20
+ FIFO Hit Total: 5
+ FIFO Fault Total: 15
+ FIFO Hit Rate: 25.00
+ */
 using namespace std;
 
 
