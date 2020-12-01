@@ -9,7 +9,7 @@
 // TODO: Need to add LRU
 // TODO: Need to add OPTIMAL
 // TODO: Last todo is refactor/organize functions to bottom of doc
-// main start ~ line 110
+// main start ~ line 100
 
 #include <algorithm>
 #include <iostream>
@@ -24,9 +24,6 @@
  FIFO Hit Rate: 25.00
  */
 using namespace std;
-
-
-
 
 class Page {
 public:
