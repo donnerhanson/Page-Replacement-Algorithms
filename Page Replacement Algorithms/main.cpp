@@ -10,7 +10,7 @@
 #include <iostream>
 #include <string>
 
-
+// 7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1 - to test against notes - passing
 using namespace std;
 
 
@@ -22,8 +22,8 @@ public:
     Page() : lastUsed(0), pageNum(-1) {};
     // param constructor
     Page(int pageNum, int lastUsed) {
-        lastUsed = lastUsed;
-        pageNum = pageNum;
+        this->lastUsed = lastUsed;
+        this->pageNum = pageNum;
     }
     // copy constructor
     Page(const Page &other) {
@@ -89,18 +89,21 @@ int leastRecentlyUsed(Page* pgArr, int len)
     return indexRet;
 }
 
-const int FRAMESIZE = 4;
+const int FRAMESIZE = 3;
 
+/************************************************/
+/* MAIN                                         */
+/************************************************/
 int main(int argc, const char * argv[]) {
     
-    
+    /* argument checking */
     if (argc < 2)
     {
         cout << "Program usage: ./executable -arg_string\n";
         exit(-1);
     }
     
-    // get string to easy format
+    // get c string to c++ string format
     string num_string = "";
     for (int i(1); i < argc; i++)
     {
@@ -111,29 +114,28 @@ int main(int argc, const char * argv[]) {
     num_string.erase(remove(num_string.begin(), num_string.end(), ','), num_string.end());
     // get length of string
     int arr_len = (int)num_string.length();
-    //cout << num_string;
-    //cout << "\n";
-    
-    // create fixed size c array
-    int *arr;
-    arr = new int[arr_len+1];
+
+    // create dynamic fixed size c int array
+    int *pnum_arr;
+    pnum_arr = new int[arr_len+1];
     // convert chars to nums
-    //cout << "input string: ";
     for(int i(0); i < arr_len; i++)
     {
         char num = num_string[i];
-        arr[i] = num - '0';
-        if (arr[i] >= 10 || arr[i] < 0)
+        pnum_arr[i] = num - '0';
+        // number bound checking -> 0-9
+        if (pnum_arr[i] >= 10 || pnum_arr[i] < 0)
         {
-            cout << "input contains a number not between 0 and 9 inclusive\n";
+            cout << "input contains a number not between 0 and 9 inclusive or a non digit character\n";
             exit(-2);
         }
-       
-        /* // print the string
-        if (i < arr_len - 1)
-            cout << arr[i] << ", ";
-        else
-            cout << arr[i] << "\n";
+        
+        /*
+         // print the string
+         if (i < arr_len - 1)
+         cout << arr[i] << ", ";
+         else
+         cout << arr[i] << "\n";
          */
     }
     
@@ -145,7 +147,8 @@ int main(int argc, const char * argv[]) {
     Page TLB [FRAMESIZE];
     
     for (int i(0); i < arr_len; i++) {
-        int pnum = arr[i];
+        int pnum = pnum_arr[i];
+        // if not in TLB - FIFO alg
         if (!containsPageNum(pnum, TLB, FRAMESIZE)) {
             for(int j(0); j < FRAMESIZE; j++) {
                 if (j < FRAMESIZE - 1) {
@@ -159,26 +162,35 @@ int main(int argc, const char * argv[]) {
             }
         }
         else {
+            // we know tlb contains - update last used
+            // and increment hits
             for(int j(0); j < FRAMESIZE; j++) {
                 if (TLB[j].getPageNum() == pnum) {
                     TLB[j].setLastUsed(0);
-                    //cout << TLB[j] << "HIT!\n";
                     hit_total++;
                 }
             }
-            //cout << "i%: " << i % FRAMESIZE << "\n";
         }
     }
     
     hit_rate = ((double)hit_total/(double)arr_len) * 100;
-    printf("Hit Rate: %.2f\n",hit_rate);
+    printf("Input Page String Length: %d\n", arr_len);
+    printf("FIFO Hit Total: %d\n", hit_total);
+    printf("FIFO Fault Total: %d\n", arr_len - hit_total);
+    printf("FIFO Hit Rate: %.2f\n", hit_rate);
     /* END FIFO */
     
     
     /* BEGIN LRU */
+    hit_total = 0;
+    hit_rate = 0.0;
+    // reset all TLB elements
+    // reuse array
+    
+    
     
     /* END LRU */
     
-    delete [] arr;
+    delete [] pnum_arr;
     return 0;
 }
