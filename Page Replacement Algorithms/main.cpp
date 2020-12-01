@@ -152,10 +152,14 @@ int main(int argc, const char * argv[]) {
         if (!containsPageNum(pnum, TLB, FRAMESIZE)) {
             for(int j(0); j < FRAMESIZE; j++) {
                 if (j < FRAMESIZE - 1) {
+                    // pop off front by overriding curr
+                    // with next from beg. to last - 1
                     TLB[j] = TLB[j+1];
                     TLB[j].incLastUsed();
                 }
                 else {
+                    // set last element to
+                    // the "not found" page - back queue
                     TLB[j].setLastUsed(0);
                     TLB[j].setPageNum(pnum);
                 }
@@ -169,10 +173,16 @@ int main(int argc, const char * argv[]) {
                     TLB[j].setLastUsed(0);
                     hit_total++;
                 }
+                else{
+                    // increment the last time count
+                    TLB[j].incLastUsed();
+                }
             }
         }
-    }
+    } /* end FIFO for loop */
     
+    
+    /* Output FIFO results */
     hit_rate = ((double)hit_total/(double)arr_len) * 100;
     printf("Input Page String Length: %d\n", arr_len);
     printf("FIFO Hit Total: %d\n", hit_total);
@@ -186,10 +196,15 @@ int main(int argc, const char * argv[]) {
     hit_rate = 0.0;
     // reset all TLB elements
     // reuse array
-    
+    /* Stuff here */
     
     
     /* END LRU */
+    
+    
+    /* BEGIN OPTIMAL */
+    /* Stuff here */
+    /* END OPTIMAL */
     
     delete [] pnum_arr;
     return 0;
