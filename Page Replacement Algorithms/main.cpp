@@ -8,6 +8,8 @@
 // TODO: Need to add Documentation - readme, header
 // TODO: Need to add LRU
 // TODO: Need to add OPTIMAL
+// TODO: Last todo is refactor/organize functions to bottom of doc
+// main start ~ line 110
 
 #include <algorithm>
 #include <iostream>
@@ -202,6 +204,7 @@ int main(int argc, const char * argv[]) {
     
     
     /* BEGIN LRU */
+    // Counter implementation
     hit_total = 0;
     hit_rate = 0.0;
     // reset all TLB elements
