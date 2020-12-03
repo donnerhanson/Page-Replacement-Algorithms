@@ -28,7 +28,7 @@
    <h3 align="center">Page Replacement Algorithms</h3>
 
    <p align="center">
-    A Simulation of Demonstrating Virtual Memory Paging Algorithms in an OS
+    A Simulation Demonstrating Virtual Memory Paging Algorithms in an OS
      <br />
    </p>
  </p>
