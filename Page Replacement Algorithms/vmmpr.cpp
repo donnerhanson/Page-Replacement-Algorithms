@@ -314,7 +314,7 @@ int main(int argc, const char * argv[]) {
     
     /* BEGIN OPTIMAL */
     cout << "\n\n";
-    cout << "optimal hit table \n";
+    cout << "OPTIMAL hit table \n";
     // reset all TLB elements and totals
        for (int i(0); i < FRAMESIZE; i++)
        {
