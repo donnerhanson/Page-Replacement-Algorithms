@@ -3,8 +3,8 @@ User Input String: 7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1
 FRAMESIZE: 4
 
 
-FIFO hit table 
- *  *  *  *  H  *  H  *  H  H  *  H  H  *  *  H  H  *  H  H 
+FIFO hit table
+ *  *  *  *  H  *  H  *  H  H  *  H  H  *  *  H  H  *  H  H
  7  0  1  2  0  3  0  4  2  3  0  3  2  1  2  0  1  7  0  1
 Input Page String Length: 20
 FIFO Hit Total: 10
@@ -12,8 +12,8 @@ FIFO Fault Total: 10
 FIFO Hit Rate: 50.00 %
 
 
-LRU hit table 
- *  *  *  *  H  *  H  *  H  H  H  H  H  *  H  H  H  *  H  H 
+LRU hit table
+ *  *  *  *  H  *  H  *  H  H  H  H  H  *  H  H  H  *  H  H
  7  0  1  2  0  3  0  4  2  3  0  3  2  1  2  0  1  7  0  1
 Input Page String Length: 20
 LRU Hit Total: 12
@@ -21,8 +21,8 @@ LRU Fault Total: 8
 LRU Hit Rate: 60.00 %
 
 
-optimal hit table 
- *  *  *  *  H  *  H  *  H  H  H  H  H  *  H  H  H  *  H  H 
+Optimal hit table 
+ *  *  *  *  H  *  H  *  H  H  H  H  H  *  H  H  H  *  H  H
  7  0  1  2  0  3  0  4  2  3  0  3  2  1  2  0  1  7  0  1
 Input Page String Length: 20
 OPTIMAL Hit Total: 12

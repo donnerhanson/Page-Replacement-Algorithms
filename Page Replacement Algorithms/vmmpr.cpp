@@ -15,30 +15,20 @@ g++ -std=c++0x -Wall -Wextra -g vmmpr.cpp -o vmmpr;
 
  EXAMPLE:
  ./vmmpr 1, 2, 3, 4, 5, 3, 4, 1, 6, 7, 8, 7, 8, 9, 7, 8, 9, 5, 4, 5, 4, 2
- 
+
 Functionality:
  Simulates Virtual Memory Page Swapping Algorithms
  User passes a number string as an argument to the program at the command line that determines the Page numbers in succession.
  The algorithms used to simulate page swaps are: First in First Out, Least Recently Used, and Optimal.
-
-
- Default TLB size is maintained by the constant variable FRAMESIZE
-
 */
+
 #include <algorithm>
 #include <iostream>
 #include <string>
 
-// 7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1 - to test against notes - passing
-/*
- ---Should be for FIFO---
- Input Page String Length: 20
- FIFO Hit Total: 5
- FIFO Fault Total: 15
- FIFO Hit Rate: 25.00
- */
 using namespace std;
 
+/*Page Class*/
 class Page {
 public:
     // default set to initial when no params passed
@@ -65,7 +55,7 @@ public:
     void setPageNum(int pnum){
         pageNum = pnum;
     }
-    
+
     int getLastUsed() const {
         return lastUsed;
     }
@@ -84,7 +74,7 @@ private:
     int pageNum;
 } ;
 
-
+/*containsPageNum function*/
 bool containsPageNum(int search, Page* pgArr, int len)
 {
     for (int i(0); i < len; i++)
@@ -93,11 +83,11 @@ bool containsPageNum(int search, Page* pgArr, int len)
             return true;
         }
     }
-    
+
     return false;
-}
+}// end of containsPageNum
 
-
+/*leastRecentlyUsed function*/
 int leastRecentlyUsed(Page* pgArr, int len)
 {
     int prev = 0;
@@ -110,13 +100,10 @@ int leastRecentlyUsed(Page* pgArr, int len)
         }
     }
     return indexRet;
-}
+}// end of leastRecentlyUsed
 
 
-
-const int FRAMESIZE = 4;
-
-// get an index
+/*getOptimalIndex function*/
 int getOptimalIndex(Page* TLB, int len)
 {
     // we want to throw this out of the arr
@@ -130,34 +117,47 @@ int getOptimalIndex(Page* TLB, int len)
         }
     }
     return indexRet;
-}
+}// end of getOptimalIndex
+
+// Default TLB size is maintained by the constant variable FRAMESIZE
+const int FRAMESIZE = 4;
 
 /************************************************/
 /* MAIN                                         */
 /************************************************/
 int main(int argc, const char * argv[]) {
-    
+
     /* argument checking */
     if (argc < 2)
     {
         cout << "Program usage: ./executable -arg_string\n";
         exit(-1);
     }
-    
+
     // get c string to c++ string format
     string num_string = "";
     for (int i(1); i < argc; i++)
     {
         num_string += argv[i];
     }
-    
+
+    cout << "\n";
+
+    // display the user int string
     cout << "User Input String: " << num_string << "\n\n";
-    
+
     // remove commas
     num_string.erase(remove(num_string.begin(), num_string.end(), ','), num_string.end());
     // get length of string
     int arr_len = (int)num_string.length();
     // create dynamic fixed size c int array
+
+    // Error handling- maxiumum 40 numbers
+    if (arr_len > 40) {
+      cout << "Error: Input maxiumum of 40 numbers" << endl;
+      exit(-2);
+    }
+
     int *pnum_arr;
     pnum_arr = new int[arr_len+1];
     // convert chars to nums
@@ -168,28 +168,26 @@ int main(int argc, const char * argv[]) {
         // number bound checking -> 0-9
         if (pnum_arr[i] >= 10 || pnum_arr[i] < 0)
         {
-            cout << "input contains a number not between 0 and 9 inclusive or a non digit character\n";
-            exit(-2);
+            cout << "Input contains a number not between 0 and 9 inclusive or a non digit character\n";
+            exit(-3);
         }
-        
-        
-     /*   // print the string
-        if (i < arr_len - 1)
-            cout << pnum_arr[i] << ", ";
-        else
-            cout << pnum_arr[i] << "\n";*/
-        
+
     }
+
     char percent_sign = '%';
+    // display the TLB size
     cout << "FRAMESIZE: " << FRAMESIZE <<"\n";
+
     /* FIFO */
     cout << "\n\n";
     cout << "FIFO hit table \n";
+
+    // initialize outputs
     int hit_total = 0;
     double hit_rate = 0;
     // initialize tlb
     Page TLB [FRAMESIZE];
-    
+
     for (int i(0); i < arr_len; i++) {
         int pnum = pnum_arr[i];
         // if not in TLB - FIFO alg
@@ -226,15 +224,17 @@ int main(int argc, const char * argv[]) {
             }
         }
     } /* end FIFO for loop */
-    cout << "\n ";
-    
+
+    cout << "\n";
+
+    // print the user int string
     for (int i(0); i < arr_len; i++) {
-        // print the string
                if (i < arr_len - 1)
                    cout << pnum_arr[i] << "  ";
                else
                    cout << pnum_arr[i] << "\n";
     }
+
     /* Output FIFO results */
     hit_rate = ((double)hit_total/(double)arr_len) * 100;
     printf("Input Page String Length: %d\n", arr_len);
@@ -242,22 +242,22 @@ int main(int argc, const char * argv[]) {
     printf("FIFO Fault Total: %d\n", arr_len - hit_total);
     printf("FIFO Hit Rate: %.2f %c\n", hit_rate, percent_sign);
     /* END FIFO */
-    
-    
+
+
     /* BEGIN LRU */
     cout << "\n\n";
     cout << "LRU hit table \n";
-    // Counter implementation
+
+    // initialize outputs
     hit_total = 0;
     hit_rate = 0.0;
-    
+
     // reset all TLB elements
     for (int i(0); i < FRAMESIZE; i++)
     {
         TLB[i].Reset();
     }
-    // reuse array
-    /* Stuff here */
+
     for (int i(0); i < arr_len; i++) {
         int pnum = pnum_arr[i];
         // if not in TLB - FIFO alg
@@ -272,7 +272,7 @@ int main(int argc, const char * argv[]) {
             TLB[lru_page_index].setLastUsed(-1);
             for(int j(0); j < FRAMESIZE; j++) {
                 TLB[j].incLastUsed(); // increment all TLB values
-                
+
             }
         }
         else {
@@ -290,117 +290,99 @@ int main(int argc, const char * argv[]) {
                 }
             }
         }
-    } /* end FIFO for loop */
-    
-    cout << "\n ";
-    
+    } /* end LRU for loop */
+
+    cout << "\n";
+
+    // print the user int string
     for (int i(0); i < arr_len; i++) {
-        // print the string
                if (i < arr_len - 1)
                    cout << pnum_arr[i] << "  ";
                else
                    cout << pnum_arr[i] << "\n";
     }
-    
-    
+
+    /* Output LRU results */
     hit_rate = ((double)hit_total/(double)arr_len) * 100;
     printf("Input Page String Length: %d\n", arr_len);
     printf("LRU Hit Total: %d\n", hit_total);
     printf("LRU Fault Total: %d\n", arr_len - hit_total);
     printf("LRU Hit Rate: %.2f %c\n", hit_rate, percent_sign);
-    
     /* END LRU */
-    
-    
+
+
     /* BEGIN OPTIMAL */
     cout << "\n\n";
-    cout << "optimal hit table \n";
-    // reset all TLB elements and totals
-       for (int i(0); i < FRAMESIZE; i++)
-       {
-           TLB[i].Reset();
-       }
+    cout << "Optimal hit table \n";
+
+    // initialize outputs
     hit_total = 0;
     hit_rate = 0.0;
-    // psuedo code
-    // fill in the framesize amount of pages first
-    // THEN
-    // IF THE next number from the user string is not in the TLB,
-    // Compare each number in the TLB to the remaining user string page entries.
-    // each number in the TLB will have a count that is associated with the distance, from the current position in the user string, to the number's next position in the user string.
-    // if the number does not occur again set the count to -1
-    // ELSE: if the number IS in the TLB update hit and move to next number
-    
-    
-    // GENERAL STRUCTURE - n^3 - can see why optimal computing is not great
-    // "outer outer" loop that iterates through user string {
-    //  outer loop TLB nums (i) {
-    //          inner loop - need to know current position  j(pos){
-    //          go through the remaining entries in the user string compared to the
-    //          TLB number at i
-    //          have a local counter (j+pos) if TLB[i] == usr str[j+pos] update
-    //          count to j+pos.
-    //          }
-    //  }
-    //  THEN check which page has the highest count and swap with new -
-    //  reset counts in tlb
-    //}
+
+    // reset all TLB elements and totals
+    for (int i(0); i < FRAMESIZE; i++)
+    {
+      TLB[i].Reset();
+    }
+
     for (int curr_pnum_index(0); curr_pnum_index < arr_len; curr_pnum_index++) {
-        
+
         if (!containsPageNum(pnum_arr[curr_pnum_index],
                              TLB, FRAMESIZE)) {
             // add new - if not contains
             for(int i(0); i < FRAMESIZE; i++) // TLB numbers
             {
-                for(int j(curr_pnum_index); j < arr_len; j++) // CHECK AGAINST REMAINING USER STRING NUMS
+                for(int j(curr_pnum_index); j < arr_len; j++) // check with the reamianing user int string
                 {
-                    
-                    if (TLB[i].getPageNum() == pnum_arr[j]) // IF PAGE NUMBER BREAK
+
+                    if (TLB[i].getPageNum() == pnum_arr[j]) // if the page number exist in the TLB
                     {
                         break;
                     }
                     else
-                        TLB[i].incLastUsed(); // INCREMENT COUNT
-                    
+                        TLB[i].incLastUsed(); // increment count
                 }
             }
-            
-            // THEN FIND WHAT HAS THE LEAST COUNT
+
+            // assign the farthest index
             int optimalTossOut = getOptimalIndex(TLB, FRAMESIZE);
             //cout << "optimalTossOut index: ----   " << optimalTossOut << "  -----\n";
+
             cout << " * ";
-            // swap TLB number with the user string current page input
+
+            // swap TLB number with the user int string current page input
             TLB[optimalTossOut].setPageNum(pnum_arr[curr_pnum_index]);
             //cout << "pnum_arr[curr_pnum_index] " << pnum_arr[curr_pnum_index] << "\n";
-            
+
             // reset all distances
             for (int k(0); k < FRAMESIZE; k++)
                 TLB[k].setLastUsed(0);
-            
+
         } else{
-        /* ELSE */
         cout << " H ";
         hit_total++;
             //cout << "Hit Total Count : " << hit_total<< "\n";
         }
-    }
-    /* END OPTIMAL */
+    }/* end LRU for loop */
+
     cout << "\n ";
-    
+
+    // print the user int string
     for (int i(0); i < arr_len; i++) {
-        // print the string
                if (i < arr_len - 1)
                    cout << pnum_arr[i] << "  ";
                else
                    cout << pnum_arr[i] << "\n";
     }
-    
+
+    /* Output OPTIMAL results */
     hit_rate = ((double)hit_total/(double)arr_len) * 100;
     printf("Input Page String Length: %d\n", arr_len);
     printf("OPTIMAL Hit Total: %d\n", hit_total);
     printf("OPTIMAL Fault Total: %d\n", arr_len - hit_total);
     printf("OPTIMAL Hit Rate: %.2f %c\n", hit_rate, percent_sign);
-    
+    /* END OPTIMAL */
+
     delete [] pnum_arr;
     return 0;
-}
+}//end of main
