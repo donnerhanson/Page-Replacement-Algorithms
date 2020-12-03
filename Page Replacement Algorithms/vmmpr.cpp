@@ -14,7 +14,7 @@ g++ -std=c++0x -Wall -Wextra -g vmmpr.cpp -o vmmpr;
 ./vmmpr <number string separated by commas>
 
  EXAMPLE:
- ./vmmpr 7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1
+ ./vmmpr 1, 2, 3, 4, 5, 3, 4, 1, 6, 7, 8, 7, 8, 9, 7, 8, 9, 5, 4, 5, 4, 2
  
 Functionality:
  Simulates Virtual Memory Page Swapping Algorithms
