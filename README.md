@@ -127,7 +127,7 @@ LRU Hit Total: 9
 LRU Fault Total: 13  
 LRU Hit Rate: 40.91 %  
 
-optimal hit table
+OPTIMAL hit table
  *  *  *  *  *  H  H  H  *  *  *  H  H  *  H  H  H  H  *  H  H  *  
  1  2  3  4  5  3  4  1  6  7  8  7  8  9  7  8  9  5  4  5  4  2  
 Input Page String Length: 22  
