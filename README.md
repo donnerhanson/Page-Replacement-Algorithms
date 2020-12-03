@@ -51,7 +51,7 @@
  <!-- ABOUT THE PROGRAM -->
  ## About The Program
 
- This program Simulates Virtual Memory Page Swapping Algorithms
+ This program Simulates Virtual Memory Page Swapping Algorithms.  
  The user passes a number string as an argument to the program at the command line that determines the Page numbers hit or miss (Page Fault) in succession.
  The algorithms used to simulate page swaps are: First in First Out, Least Recently Used, and Optimal.  
 
