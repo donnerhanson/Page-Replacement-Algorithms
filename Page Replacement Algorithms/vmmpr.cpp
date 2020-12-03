@@ -313,17 +313,17 @@ int main(int argc, const char * argv[]) {
 
     /* BEGIN OPTIMAL */
     cout << "\n\n";
-    cout << "Optimal hit table \n";
 
     // initialize outputs
     hit_total = 0;
     hit_rate = 0.0;
 
+    cout << "OPTIMAL hit table \n";
     // reset all TLB elements and totals
-    for (int i(0); i < FRAMESIZE; i++)
-    {
-      TLB[i].Reset();
-    }
+       for (int i(0); i < FRAMESIZE; i++)
+       {
+           TLB[i].Reset();
+       }
 
     for (int curr_pnum_index(0); curr_pnum_index < arr_len; curr_pnum_index++) {
 

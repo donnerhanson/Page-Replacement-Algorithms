@@ -28,7 +28,7 @@
    <h3 align="center">Page Replacement Algorithms</h3>
 
    <p align="center">
-    A Simulation of Demonstrating Virtual Memory Paging Algorithms in an OS
+    A Simulation Demonstrating Virtual Memory Paging Algorithms in an OS
      <br />
    </p>
  </p>
@@ -51,7 +51,7 @@
  <!-- ABOUT THE PROGRAM -->
  ## About The Program
 
- This program Simulates Virtual Memory Page Swapping Algorithms
+ This program Simulates Virtual Memory Page Swapping Algorithms.  
  The user passes a number string as an argument to the program at the command line that determines the Page numbers hit or miss (Page Fault) in succession.
  The algorithms used to simulate page swaps are: First in First Out, Least Recently Used, and Optimal.  
 
@@ -127,7 +127,7 @@ LRU Hit Total: 9
 LRU Fault Total: 13  
 LRU Hit Rate: 40.91 %  
 
-optimal hit table
+OPTIMAL hit table
  *  *  *  *  *  H  H  H  *  *  *  H  H  *  H  H  H  H  *  H  H  *  
  1  2  3  4  5  3  4  1  6  7  8  7  8  9  7  8  9  5  4  5  4  2  
 Input Page String Length: 22  
