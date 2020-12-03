@@ -56,8 +56,12 @@
             isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "7, 2, 3, 1, 2, 5, 3, 4, 6, 7, 7, 1, 0, 5, 4, 6, 2, 3, 0 ,1"
+            argument = "7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1"
             isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "7, 2, 3, 1, 2, 5, 3, 4, 6, 7, 7, 1, 0, 5, 4, 6, 2, 3, 0 ,1"
+            isEnabled = "NO">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "4,7,3,0,1,7,3,8,5,4,5,3,4,7"

@@ -1,16 +1,30 @@
-//
-//  main.cpp
-//  Page Replacement Algorithms
-//
-//  Created by Donner Hanson on 11/30/20.
-//  Copyright © 2020 Donner Hanson. All rights reserved.
-//
-// TODO: Need to add Documentation - readme, header
-// TODO: Need to add LRU
-// TODO: Need to add OPTIMAL
-// TODO: Last todo is refactor/organize functions to bottom of doc
-// main start ~ line 100
+/*
+Project: Page Replacement Algorithms
+Student Name: Donner Hanson, Michelle Yoon
+Student ID: 001276484
+Student Email: hanso127@mail.chapman.edu
+Date: 12/02/2020
+File: vmmpr.cpp
+Description: main
 
+Compilation:
+g++ -std=c++0x -Wall -Wextra -g vmmpr.cpp -o vmmpr;
+
+ Run instructions:
+./vmmpr <number string separated by commas>
+
+ EXAMPLE:
+ ./vmmpr 7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1,7,0,1
+ 
+Functionality:
+ Simulates Virtual Memory Page Swapping Algorithms
+ User passes a number string as an argument to the program at the command line that determines the Page numbers in succession.
+ The algorithms used to simulate page swaps are: First in First Out, Least Recently Used, and Optimal.
+
+
+ Default TLB size is maintained by the constant variable FRAMESIZE
+
+*/
 #include <algorithm>
 #include <iostream>
 #include <string>
@@ -100,7 +114,7 @@ int leastRecentlyUsed(Page* pgArr, int len)
 
 
 
-const int FRAMESIZE = 3;
+const int FRAMESIZE = 4;
 
 // get an index
 int getOptimalIndex(Page* TLB, int len)
@@ -137,11 +151,12 @@ int main(int argc, const char * argv[]) {
         num_string += argv[i];
     }
     
+    cout << "User Input String: " << num_string << "\n\n";
+    
     // remove commas
     num_string.erase(remove(num_string.begin(), num_string.end(), ','), num_string.end());
     // get length of string
     int arr_len = (int)num_string.length();
-    
     // create dynamic fixed size c int array
     int *pnum_arr;
     pnum_arr = new int[arr_len+1];
@@ -165,7 +180,8 @@ int main(int argc, const char * argv[]) {
             cout << pnum_arr[i] << "\n";*/
         
     }
-    
+    char percent_sign = '%';
+    cout << "FRAMESIZE: " << FRAMESIZE <<"\n";
     /* FIFO */
     cout << "\n\n";
     cout << "FIFO hit table \n";
@@ -224,7 +240,7 @@ int main(int argc, const char * argv[]) {
     printf("Input Page String Length: %d\n", arr_len);
     printf("FIFO Hit Total: %d\n", hit_total);
     printf("FIFO Fault Total: %d\n", arr_len - hit_total);
-    printf("FIFO Hit Rate: %.2f\n", hit_rate);
+    printf("FIFO Hit Rate: %.2f %c\n", hit_rate, percent_sign);
     /* END FIFO */
     
     
@@ -291,7 +307,7 @@ int main(int argc, const char * argv[]) {
     printf("Input Page String Length: %d\n", arr_len);
     printf("LRU Hit Total: %d\n", hit_total);
     printf("LRU Fault Total: %d\n", arr_len - hit_total);
-    printf("LRU Hit Rate: %.2f\n", hit_rate);
+    printf("LRU Hit Rate: %.2f %c\n", hit_rate, percent_sign);
     
     /* END LRU */
     
@@ -383,7 +399,7 @@ int main(int argc, const char * argv[]) {
     printf("Input Page String Length: %d\n", arr_len);
     printf("OPTIMAL Hit Total: %d\n", hit_total);
     printf("OPTIMAL Fault Total: %d\n", arr_len - hit_total);
-    printf("OPTIMAL Hit Rate: %.2f\n", hit_rate);
+    printf("OPTIMAL Hit Rate: %.2f %c\n", hit_rate, percent_sign);
     
     delete [] pnum_arr;
     return 0;

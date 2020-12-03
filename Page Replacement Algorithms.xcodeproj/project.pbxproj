@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		12BB81CB2575F4210064C21C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12BB81CA2575F4210064C21C /* main.cpp */; };
+		12BB81CB2575F4210064C21C /* vmmpr.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 12BB81CA2575F4210064C21C /* vmmpr.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +24,8 @@
 
 /* Begin PBXFileReference section */
 		12BB81C72575F4210064C21C /* Page Replacement Algorithms */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Page Replacement Algorithms"; sourceTree = BUILT_PRODUCTS_DIR; };
-		12BB81CA2575F4210064C21C /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		12BB81CA2575F4210064C21C /* vmmpr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = vmmpr.cpp; sourceTree = "<group>"; };
+		12D902812578A6DC00D9818F /* Output.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Output.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +58,8 @@
 		12BB81C92575F4210064C21C /* Page Replacement Algorithms */ = {
 			isa = PBXGroup;
 			children = (
-				12BB81CA2575F4210064C21C /* main.cpp */,
+				12D902812578A6DC00D9818F /* Output.txt */,
+				12BB81CA2575F4210064C21C /* vmmpr.cpp */,
 			);
 			path = "Page Replacement Algorithms";
 			sourceTree = "<group>";
@@ -119,7 +121,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12BB81CB2575F4210064C21C /* main.cpp in Sources */,
+				12BB81CB2575F4210064C21C /* vmmpr.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
