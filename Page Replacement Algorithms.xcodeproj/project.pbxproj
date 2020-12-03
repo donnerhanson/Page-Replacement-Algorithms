@@ -25,7 +25,7 @@
 /* Begin PBXFileReference section */
 		12BB81C72575F4210064C21C /* Page Replacement Algorithms */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "Page Replacement Algorithms"; sourceTree = BUILT_PRODUCTS_DIR; };
 		12BB81CA2575F4210064C21C /* vmmpr.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = vmmpr.cpp; sourceTree = "<group>"; };
-		12D902812578A6DC00D9818F /* Output.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Output.txt; sourceTree = "<group>"; };
+		12D902832578A79A00D9818F /* Output.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = Output.txt; path = ../../Output.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,8 +58,8 @@
 		12BB81C92575F4210064C21C /* Page Replacement Algorithms */ = {
 			isa = PBXGroup;
 			children = (
-				12D902812578A6DC00D9818F /* Output.txt */,
 				12BB81CA2575F4210064C21C /* vmmpr.cpp */,
+				12D902832578A79A00D9818F /* Output.txt */,
 			);
 			path = "Page Replacement Algorithms";
 			sourceTree = "<group>";
