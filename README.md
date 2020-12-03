@@ -78,7 +78,7 @@ less than 0 or greater than 9 are passed.
  git clone https://github.com/donnerhanson/Page-Replacement-Algorithms  
  ```  
  2. Compilation  
- Navigate to the location of the cloned program Page Replacement Algorithms
+ Navigate to the location of the cloned program within the Page Replacement Algorithms
  directory.  
 
 compile using the command  
