@@ -358,7 +358,7 @@ int main(int argc, const char * argv[]) {
             hit_total++;
             //cout << "Hit Total Count : " << hit_total<< "\n";
         }
-    }/* end LRU for loop */
+    }/* end OPTIMAL for loop */
     
     cout << "\n";
     
